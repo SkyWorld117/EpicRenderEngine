@@ -1,3 +1,0 @@
-C:/Users/Hendrik/CLionProjects/epicRenderer/cmake-build-debug/CMakeFiles/epicRenderer.dir
-C:/Users/Hendrik/CLionProjects/epicRenderer/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Hendrik/CLionProjects/epicRenderer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

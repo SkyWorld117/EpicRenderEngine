@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\epicRenderer.dir/objects.a
-C:\PROGRA~1\MingW\X86_64~1.0-R\mingw64\bin\ar.exe cr CMakeFiles\epicRenderer.dir/objects.a @CMakeFiles\epicRenderer.dir\objects1.rsp
-C:\PROGRA~1\MingW\X86_64~1.0-R\mingw64\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\epicRenderer.dir/objects.a -Wl,--no-whole-archive -o epicRenderer.exe -Wl,--out-implib,libepicRenderer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\epicRenderer.dir\linklibs.rsp
