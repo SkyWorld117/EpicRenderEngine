@@ -10,7 +10,7 @@ public class EpicRenderEngine {
         BufferedImage bi = new BufferedImage(500, 500, BufferedImage.TYPE_3BYTE_BGR);
         for(int i = 0; i < 500; i++) {
             for(int j = 0; j < 500; j++) {
-                bi.getRaster().setPixel(i, j, new int[]{i , j , i + j});
+                bi.getRaster().setPixel(i, j, new int[]{i , j , i * j});
             }
         }
 
