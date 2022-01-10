@@ -29,4 +29,10 @@ public class Vector3f {
     public Vector3f scale(float scalar) {
         return ZERO;
     }
+
+    public void set(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }

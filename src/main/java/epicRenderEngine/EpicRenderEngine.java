@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 
 class EpicRenderEngine {
 
-    public static final int WNDW_WIDTH = 600;
-    public static final int WNDW_HEIGHT = 400;
+    public static final int WIN_WIDTH = 600;
+    public static final int WIN_HEIGHT = 400;
 
     public static void main(String[] args) {
         FrameWrapper fw = new FrameWrapper("Frame", 255, 255);
@@ -18,5 +18,8 @@ class EpicRenderEngine {
         }
 
         fw.setVisible(true);
+
+
+
     }
 }
