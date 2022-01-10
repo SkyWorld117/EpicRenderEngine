@@ -27,7 +27,7 @@ application {
 }
 
 dependencies {
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation 'org.ejml:all:0.30'
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
