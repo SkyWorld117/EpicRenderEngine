@@ -18,8 +18,5 @@ class EpicRenderEngine {
         }
 
         fw.setVisible(true);
-
-
-
     }
 }
