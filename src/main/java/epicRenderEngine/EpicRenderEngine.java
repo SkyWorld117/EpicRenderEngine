@@ -4,19 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-class EpicRenderEngine {
-
-    public static final int WNDW_WIDTH = 600;
-    public static final int WNDW_HEIGHT = 400;
-
+public class EpicRenderEngine {
+    
     public static void main(String[] args) {
-        FrameWrapper fw = new FrameWrapper("Frame", 255, 255);
-        for(int i = 0; i < 255; i++) {
-            for(int j = 0; j < 255; j++) {
-                fw.setPixel(i, j, i , j , i * j);
+        BufferedImage bi = new BufferedImage(500, 500, BufferedImage.TYPE_3BYTE_BGR);
+        for(int i = 0; i < 500; i++) {
+            for(int j = 0; j < 500; j++) {
+                bi.getRaster().setPixel(i, j, new int[]{i , j , i * j});
             }
         }
 
-        fw.setVisible(true);
+        JFrame frame = new JFrame("FrameDemo") {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                g.drawImage(bi, 0, 0, 500, 500, null);
+            }
+        };
+
+        frame.pack();
+        frame.setSize(500, 500);
+
+
+        frame.setVisible(true);
     }
 }
