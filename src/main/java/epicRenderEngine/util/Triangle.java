@@ -10,4 +10,8 @@ public class Triangle {
         this.v1 = v1;
         this.v2 = v2;
     }
+
+    public int getColor() {
+        return 0;
+    }
 }

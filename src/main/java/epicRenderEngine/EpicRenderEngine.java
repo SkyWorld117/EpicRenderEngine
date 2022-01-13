@@ -48,13 +48,7 @@ class EpicRenderEngine {
      * @param rayCaster
      */
     private static void render(FrameWrapper fw, RayCaster rayCaster) {
-        //loop through all pixels and cast a ray
-        for(int i = 0; i < WIN_WIDTH; i++) {
-            for(int j = 0; j < WIN_HEIGHT; j++) {
-                int color = rayCaster.castPixel(i, j);
-                fw.setPixel(i, j, color);
-            }
-        }
+        rayCaster.castRays(fw);
 
         //update canvas
         fw.repaint();

@@ -1,14 +1,15 @@
 package epicRenderEngine;
 
 import epicRenderEngine.util.Triangle;
+import epicRenderEngine.util.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RayCaster {
 
-    List<Triangle> triangles = new ArrayList<>();
-    Camera cam;
+    private List<Triangle> triangles = new ArrayList<>();
+    public Camera cam;
 
     public RayCaster(double screenWidth, double screenHeight) {
         this.cam = new Camera(screenWidth, screenHeight);
@@ -16,17 +17,39 @@ public class RayCaster {
 
     /**
      * Casts a ray at the pixel specified and returns color
-     *
-     * @param x
-     * @param y
+     * @param fw
      * @return
      */
-    public int castPixel(int x, int y) {
-        return 0;
+    public void castRays(FrameWrapper fw) {
+        Vector3f focalPoint = cam.getFocalPoint();
+        for(int i = 0; i < cam.screenWidth; i++) {
+            for(int j = 0; j < cam.screenWidth; j++) {
+                int color = this.castPixel(focalPoint, i, j);
+                fw.setPixel(i, j, color);
+            }
+        }
+    }
+
+    /**
+     * Casts a ray through pixel at i, j and returns color of intersecting Triangle. If there is no intersection, returns -1.
+     *
+     * @param focalPoint
+     * @param i
+     * @param j
+     * @return
+     */
+    private int castPixel(Vector3f focalPoint, int i, int j) {
+        Vector3f ray = this.cam.getVecThroughPoint(focalPoint, i, j);
+        Triangle intersecting = getIntersectingTriangle(focalPoint, ray);
+        if(intersecting != null) {
+            return intersecting.getColor();
+        }
+
+        return -1;
     }
 
 
-    private Triangle getIntersectingTriangle() {
+    private Triangle getIntersectingTriangle(Vector3f location, Vector3f direction) {
         return null;
     }
 }
