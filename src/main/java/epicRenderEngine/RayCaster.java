@@ -8,10 +8,10 @@ import java.util.List;
 public class RayCaster {
 
     List<Triangle> triangles = new ArrayList<>();
-    Camera cam = new Camera();
+    Camera cam;
 
-    public RayCaster() {
-
+    public RayCaster(double screenWidth, double screenHeight) {
+        this.cam = new Camera(screenWidth, screenHeight);
     }
 
     /**
@@ -25,5 +25,8 @@ public class RayCaster {
         return 0;
     }
 
-    private Triangle getIntersectingTriangle(Vec)
+
+    private Triangle getIntersectingTriangle() {
+        return null;
+    }
 }

@@ -1,7 +1,5 @@
 package epicRenderEngine.util;
 
-import jdk.incubator.vector.FloatVector;
-
 public class Util {
 
     public static int packRGB(int r, int b, int g) {
