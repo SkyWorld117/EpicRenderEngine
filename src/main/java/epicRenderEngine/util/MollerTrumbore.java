@@ -15,6 +15,13 @@ public class MollerTrumbore {
      * @param triangle triangle
      * @return point of intersection
      */
+
+    /*
+    The Möller-Trumbore algorithm is a fast ray-triangle intersection algorithm. We use it to find the point of intersection from the triangle of the 3D-Models.
+    Link to an explanation:
+    https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/moller-trumbore-ray-triangle-intersection
+     */
+
     @Nullable
     public static Vector3f rayIntersectsTriangle(Vector3f rayOrigin, Vector3f ray, Triangle triangle) {
         Vector3f edge1 = triangle.v1.sub(triangle.v0);
