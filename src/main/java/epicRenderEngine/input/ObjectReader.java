@@ -1,6 +1,7 @@
 package epicRenderEngine.input;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Vector3f;
 
 public class ObjectReader {
-    public ArrayList<Triangle> load(String str) {
+    public ArrayList<Triangle> load(String str) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(str));
         int color = 0;
         int[] p = new int[3];

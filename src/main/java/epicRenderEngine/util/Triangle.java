@@ -6,7 +6,7 @@ public class Triangle {
     public Vector3f v2;
     public int r, g, b;
 
-    public void Triangle(Vector3f v0, Vector3f v1, Vector3f v2, int r, int g, int b) {
+    public Triangle(Vector3f v0, Vector3f v1, Vector3f v2, int r, int g, int b) {
         this.v0 = v0;
         this.v1 = v1;
         this.v2 = v2;

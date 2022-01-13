@@ -12,9 +12,7 @@ public class Vector3f {
 
     public float dot(Vector3f vec) {
         //Scalar product with vector vec
-        float scalar;
-        scalar = this.x * vec.x + this.y * vec.y + this.z * vec.z;
-        return scalar;
+        return this.x * vec.x + this.y * vec.y + this.z * vec.z;
     }
 
     public Vector3f cross(Vector3f vec) {
@@ -23,8 +21,7 @@ public class Vector3f {
         x_vec = this.y * vec.z - this.z * vec.y;
         y_vec = this.z * vec.x - this.x * vec.z;
         z_vec = this.x * vec.y - this.y * vec.x;
-        Vector3f vector = new Vector3f(x_vec, y_vec, z_vec);
-        return vector;
+        return new Vector3f(x_vec, y_vec, z_vec);
     }
 
     public Vector3f add(Vector3f... vecs) {
