@@ -14,4 +14,8 @@ public class Triangle {
         this.g = g;
         this.b = b;
     }
+
+    public int getColor() {
+        return 0;
+    }
 }

@@ -24,11 +24,11 @@ public class Vector3f {
         return new Vector3f(x_vec, y_vec, z_vec);
     }
 
-    public Vector3f add(Vector3f... vecs) {
+    public Vector3f add(Vector3f vecs) {
         return ZERO;
     }
 
-    public Vector3f sub(Vector3f... vecs) {
+    public Vector3f sub(Vector3f vecs) {
         return ZERO;
     }
 
@@ -40,5 +40,18 @@ public class Vector3f {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public Vector3f addX(float dx) {
+        return new Vector3f(this.x + dx, this.y, this.z);
+    }
+
+    public Vector3f addY(float dy) {
+        return new Vector3f(this.x, this.y + dy, this.z);
+    }
+
+    public Vector3f normalize() {
+        float length = (float)Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+        return new Vector3f(this.x / length, this.y / length, this.z / length);
     }
 }

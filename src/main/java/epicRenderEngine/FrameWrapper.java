@@ -24,7 +24,7 @@ public class FrameWrapper extends JFrame {
         g.drawImage(this.pixelBuffer, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 
-    public void setPixel(int x, int y, int r, int g, int b) {
-        this.pixelBuffer.setRGB(x, y, Util.packRGB(r, b ,g));
+    public void setPixel(int x, int y, int color) {
+        this.pixelBuffer.setRGB(x, y, color);
     }
 }
