@@ -11,15 +11,18 @@ public class Camera {
     private double FOV = 90.0;
 
     public Camera(double screenWidth, double screenHeight) {
+        //Constructor
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
 
     public Vector3f getFocalPoint() {
+        //method calculates the origin vector for the rays
         return position.add(new Vector3f((float)( -screenWidth/ 2.0 / Math.tan(this.FOV)), 0.0f, 0.0f));
     }
 
     public Vector3f getVecThroughPoint(Vector3f focalPoint, double x, double y) {
+        //method calculates the direction vector
         float dx = (float)(x - screenWidth / 2);
         float dy = (float)(y - screenHeight / 2);
         return position.addX(dx).addY(dy).sub(focalPoint).normalize();
