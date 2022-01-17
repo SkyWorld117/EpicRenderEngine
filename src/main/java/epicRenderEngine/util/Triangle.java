@@ -1,6 +1,9 @@
 package epicRenderEngine.util;
 
 public class Triangle {
+    /**
+     * class builds triangles with the three side vectors
+     */
     public Vector3f v0;
     public Vector3f v1;
     public Vector3f v2;
