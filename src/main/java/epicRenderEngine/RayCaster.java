@@ -1,5 +1,6 @@
 package epicRenderEngine;
 
+import epicRenderEngine.util.MollerTrumbore;
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Vector3f;
 
@@ -23,7 +24,7 @@ public class RayCaster {
     public void castRays(FrameWrapper fw) {
         Vector3f focalPoint = cam.getFocalPoint();
         for(int i = 0; i < cam.screenWidth; i++) {
-            for(int j = 0; j < cam.screenWidth; j++) {
+            for(int j = 0; j < cam.screenHeight; j++) {
                 int color = this.castPixel(focalPoint, i, j);
                 fw.setPixel(i, j, color);
             }
@@ -50,6 +51,10 @@ public class RayCaster {
 
 
     private Triangle getIntersectingTriangle(Vector3f location, Vector3f direction) {
+        for(Triangle triangle : this.triangles) {
+            Vector3f intersect = MollerTrumbore.rayIntersectsTriangle(location, direction, triangle);
+            if(intersect != null) return triangle;
+        }
         return null;
     }
 }
