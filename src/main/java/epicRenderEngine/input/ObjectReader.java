@@ -28,11 +28,8 @@ public class ObjectReader {
             Vector3f v2 = new Vector3f(p[0], p[1], p[2]);
 
             int color = scanner.nextInt();
-            int red = (color >> 16) & 0xFF;
-            int green = (color >> 8) & 0xFF;
-            int blue = color & 0xFF;
 
-            triangles[t] = new Triangle(v0, v1, v2, red, green, blue);
+            triangles[t] = new Triangle(v0, v1, v2, color);
         }
         return triangles;
     }
