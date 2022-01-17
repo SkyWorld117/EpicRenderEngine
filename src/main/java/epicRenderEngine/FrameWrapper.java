@@ -5,7 +5,9 @@ import epicRenderEngine.util.Util;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
+/**
+ * FrameWrapper paints a picture and shows it as JFrame
+ */
 public class FrameWrapper extends JFrame {
 
     public BufferedImage pixelBuffer;
