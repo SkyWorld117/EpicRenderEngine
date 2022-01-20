@@ -4,6 +4,8 @@ import epicRenderEngine.util.Util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 /**
  * FrameWrapper paints a picture and shows it as JFrame
@@ -18,6 +20,8 @@ public class FrameWrapper extends JFrame {
         this.setSize(width, height);
 
         this.pixelBuffer = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
     }
 
     @Override

@@ -27,4 +27,12 @@ public class Camera {
         float dy = (float)(y - screenHeight / 2);
         return position.addZ(dx).addY(dy).sub(focalPoint).normalize();
     }
+
+    public void move(Vector3f d) {
+        this.position = this.position.add(d);
+    }
+
+    public void rotate(float phi, double theta) {
+        //this.position = this.position.add();
+    }
 }
