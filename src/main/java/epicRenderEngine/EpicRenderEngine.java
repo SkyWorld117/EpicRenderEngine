@@ -1,10 +1,13 @@
 package epicRenderEngine;
 
+import epicRenderEngine.input.ObjectReader;
+import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Util;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 
 class EpicRenderEngine {
 
@@ -20,7 +23,12 @@ class EpicRenderEngine {
         //initialize RayCaster
         RayCaster rayCaster = new RayCaster(WIN_WIDTH, WIN_HEIGHT);
 
-        //TODO: Add triangles
+        try {
+            Triangle[] triangles = ObjectReader.load("data.txt");
+            rayCaster.addTriangles(triangles);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         boolean running = true;
         double fps = 3.0;
@@ -36,6 +44,8 @@ class EpicRenderEngine {
             if(ticks > 1000.0 / fps) {
                 render(fw, rayCaster);
                 ticks = 0;
+                break;
+
             }
 
             t0 = t1;

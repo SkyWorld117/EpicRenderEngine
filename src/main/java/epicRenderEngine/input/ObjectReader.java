@@ -2,14 +2,17 @@ package epicRenderEngine.input;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Vector3f;
 
 public class ObjectReader {
-    public Triangle[] load(String str) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File(str));
+    public static Triangle[] load(String str) throws FileNotFoundException {
+        InputStream is = ObjectReader.class.getClassLoader().getResourceAsStream(str);
+
+        Scanner scanner = new Scanner(is);
         int[] p = new int[3];
         int n = scanner.nextInt();
         Triangle[] triangles = new Triangle[n];

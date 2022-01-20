@@ -16,6 +16,10 @@ public class RayCaster {
         this.cam = new Camera(screenWidth, screenHeight);
     }
 
+    public void addTriangles(Triangle[] triangles) {
+        this.triangles.addAll(List.of(triangles));
+    }
+
     /**
      * Casts a ray at the pixel specified and returns color
      * @param fw
@@ -42,6 +46,8 @@ public class RayCaster {
     private int castPixel(Vector3f focalPoint, int i, int j) {
         Vector3f ray = this.cam.getVecThroughPoint(focalPoint, i, j);
         Triangle intersecting = getIntersectingTriangle(focalPoint, ray);
+        if(i % 10 == 0 && j % 10 == 0) System.out.println(i + " " + j + " " + ray + " " + intersecting);
+
         if(intersecting != null) {
             return intersecting.getColor();
         }
@@ -51,10 +57,21 @@ public class RayCaster {
 
 
     private Triangle getIntersectingTriangle(Vector3f location, Vector3f direction) {
+        double minDist = Double.MAX_VALUE;
+        Triangle intersecting = null;
         for(Triangle triangle : this.triangles) {
-            Vector3f intersect = MollerTrumbore.rayIntersectsTriangle(location, direction, triangle);
-            if(intersect != null) return triangle;
+            Vector3f intersectionVec = MollerTrumbore.rayIntersectsTriangle(location, direction, triangle);
+
+            if(intersectionVec == null) continue;
+
+            double l = intersectionVec.sub(location).length();
+
+            if(l < minDist) {
+                minDist = l;
+                intersecting = triangle;
+            }
         }
-        return null;
+
+        return intersecting;
     }
 }

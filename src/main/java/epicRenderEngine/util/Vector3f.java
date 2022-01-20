@@ -62,4 +62,21 @@ public class Vector3f {
         float length = (float)Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
         return new Vector3f(this.x / length, this.y / length, this.z / length);
     }
+
+    @Override
+    public String toString() {
+        return "Vector3f{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
+
+    public Vector3f addZ(float dz) {
+        return new Vector3f(this.x, this.y, this.z + dz);
+    }
+
+    public double length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    }
 }
