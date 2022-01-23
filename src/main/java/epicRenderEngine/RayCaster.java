@@ -1,8 +1,6 @@
 package epicRenderEngine;
 
-import epicRenderEngine.util.MollerTrumbore;
-import epicRenderEngine.util.Triangle;
-import epicRenderEngine.util.Vector3f;
+import epicRenderEngine.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ public class RayCaster {
     private List<Triangle> triangles = new ArrayList<>();
     public Camera cam;
 
-    public RayCaster(double screenWidth, double screenHeight) {
+    public RayCaster(int screenWidth, int screenHeight) {
         this.cam = new Camera(screenWidth, screenHeight);
     }
 
@@ -22,15 +20,16 @@ public class RayCaster {
 
     /**
      * Casts a ray at the pixel specified and returns color
-     * @param fw
+     * @param p
      * @return
      */
-    public void castRays(FrameWrapper fw) {
+    public void castRays(RaycasterPanel p) {
         Vector3f focalPoint = cam.getFocalPoint();
+
         for(int i = 0; i < cam.screenWidth; i++) {
             for(int j = 0; j < cam.screenHeight; j++) {
-                int color = this.castPixel(focalPoint, i, j);
-                fw.setPixel(i, j, color);
+                int color = this.castPixel(cam.position, cam.getVecThroughPoint(focalPoint, i, j));
+                p.setPixel(i, j, color);
             }
         }
     }
@@ -38,15 +37,10 @@ public class RayCaster {
     /**
      * Casts a ray through pixel at i, j and returns color of intersecting Triangle. If there is no intersection, returns -1.
      *
-     * @param focalPoint
-     * @param i
-     * @param j
      * @return
      */
-    private int castPixel(Vector3f focalPoint, int i, int j) {
-        Vector3f ray = this.cam.getVecThroughPoint(focalPoint, i, j);
-        Triangle intersecting = getIntersectingTriangle(focalPoint, ray);
-        if(i % 10 == 0 && j % 10 == 0) System.out.println(i + " " + j + " " + ray + " " + intersecting);
+    private int castPixel(Vector3f location, Vector3f ray) {
+        Triangle intersecting = getIntersectingTriangle(location, ray);
 
         if(intersecting != null) {
             return intersecting.getColor();

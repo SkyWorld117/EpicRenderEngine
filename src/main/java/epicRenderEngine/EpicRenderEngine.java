@@ -1,5 +1,6 @@
 package epicRenderEngine;
 
+import epicRenderEngine.input.KeyboardListener;
 import epicRenderEngine.input.ObjectReader;
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Util;
@@ -15,13 +16,22 @@ class EpicRenderEngine {
     public static final int WIN_HEIGHT = 400;
 
     public static void main(String[] args) {
-
-        //create FrameWrapper
-        FrameWrapper fw = new FrameWrapper("Frame", WIN_WIDTH, WIN_HEIGHT);
-        fw.setVisible(true);
-
         //initialize RayCaster
         RayCaster rayCaster = new RayCaster(WIN_WIDTH, WIN_HEIGHT);
+
+        //create FrameWrapper
+        JFrame f = new JFrame("Frame");
+
+        f.addKeyListener(new KeyboardListener(rayCaster.cam));
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setResizable(false);
+
+        RaycasterPanel p = new RaycasterPanel(WIN_WIDTH, WIN_HEIGHT, rayCaster.cam);
+        f.add(p);
+        f.pack();
+        f.setSize(WIN_WIDTH, WIN_HEIGHT);
+
+        f.setVisible(true);
 
         try {
             Triangle[] triangles = ObjectReader.load("data.txt");
@@ -31,7 +41,7 @@ class EpicRenderEngine {
         }
 
         boolean running = true;
-        double fps = 3.0;
+        double fps = 30.0;
         long t0 = System.currentTimeMillis();
         long ticks = 0;
 
@@ -42,10 +52,8 @@ class EpicRenderEngine {
             ticks += dt;
 
             if(ticks > 1000.0 / fps) {
-                render(fw, rayCaster);
+                render(f, p, rayCaster);
                 ticks = 0;
-                break;
-
             }
 
             t0 = t1;
@@ -54,13 +62,13 @@ class EpicRenderEngine {
 
     /**
      * Renders the scene
-     * @param fw
+     * @param p
      * @param rayCaster
      */
-    private static void render(FrameWrapper fw, RayCaster rayCaster) {
-        rayCaster.castRays(fw);
+    private static void render(JFrame f, RaycasterPanel p, RayCaster rayCaster) {
+        rayCaster.castRays(p);
 
         //update canvas
-        fw.repaint();
+        f.repaint();
     }
 }
