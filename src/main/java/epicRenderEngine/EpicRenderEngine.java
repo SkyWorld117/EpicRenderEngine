@@ -2,6 +2,7 @@ package epicRenderEngine;
 
 import epicRenderEngine.input.KeyboardListener;
 import epicRenderEngine.input.ObjectReader;
+import epicRenderEngine.util.Matrix3f;
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Util;
 
@@ -52,6 +53,12 @@ class EpicRenderEngine {
             ticks += dt;
 
             if(ticks > 1000.0 / fps) {
+
+                for(Triangle t : rayCaster.getTriangles()) {
+                    Matrix3f m = Util.getRotationZ(0.05);
+                    t.applyTransform(m);
+                }
+
                 render(f, p, rayCaster);
                 ticks = 0;
             }
@@ -67,7 +74,6 @@ class EpicRenderEngine {
      */
     private static void render(JFrame f, RaycasterPanel p, RayCaster rayCaster) {
         rayCaster.castRays(p);
-
         //update canvas
         f.repaint();
     }

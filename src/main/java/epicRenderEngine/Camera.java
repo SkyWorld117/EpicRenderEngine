@@ -39,18 +39,7 @@ public class Camera {
      * @param d
      */
     public void move(Vector3f d) {
-        if(d.x != 0) {
-            this.position = this.position.add(this.direction.scale(d.x));
-        }
-
-        if(d.y != 0) {
-            this.position = this.position.add(this.rotation.scale(d.y));
-        }
-
-        if(d.z != 0) {
-            Vector3f cross = rotation.cross(direction).normalize();
-            this.position = position.add(cross.scale(d.z));
-        }
+        this.position = this.position.add(d);
     }
 
     /**

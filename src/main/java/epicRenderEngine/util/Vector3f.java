@@ -79,4 +79,8 @@ public class Vector3f {
     public double length() {
         return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     }
+
+    public Vector3f reverse() {
+        return new Vector3f(-this.x, -this.y, -this.z);
+    }
 }

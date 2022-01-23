@@ -16,4 +16,10 @@ public class Util {
                 .add(K.mul(((float)Math.sin(theta))))
                 .add(K2.mul((float)(1.0f - Math.cos(theta))));
     }
+
+    public static Matrix3f getRotationZ(double theta) {
+        return new Matrix3f((float)Math.cos(theta), -(float)Math.sin(theta), 0,
+                            (float)Math.sin(theta), (float)Math.cos(theta), 0,
+                        0,                  0,                      1);
+    }
 }

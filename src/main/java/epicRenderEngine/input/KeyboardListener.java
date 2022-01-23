@@ -21,17 +21,17 @@ public class KeyboardListener extends KeyAdapter {
         int keyCode = event.getKeyCode();
 
         //translation
-        if(keyCode == KeyEvent.VK_DOWN) cam.move(new Vector3f(MOVE_SPEED, 0, 0));
-        if(keyCode == KeyEvent.VK_UP) cam.move(new Vector3f(-MOVE_SPEED, 0, 0));
-        if(keyCode == KeyEvent.VK_LEFT) cam.move(new Vector3f(0, 0, MOVE_SPEED));
-        if(keyCode == KeyEvent.VK_RIGHT) cam.move(new Vector3f(0, 0, -MOVE_SPEED));
-        if(keyCode == KeyEvent.VK_SPACE) cam.move(new Vector3f(0, -MOVE_SPEED, 0));
-        if(keyCode == KeyEvent.VK_SHIFT) cam.move(new Vector3f(0, MOVE_SPEED, 0));
+        if(keyCode == KeyEvent.VK_DOWN) cam.move(new Vector3f(-MOVE_SPEED, 0, 0));
+        if(keyCode == KeyEvent.VK_UP) cam.move(new Vector3f(MOVE_SPEED, 0, 0));
+        if(keyCode == KeyEvent.VK_LEFT) cam.move(new Vector3f(0, MOVE_SPEED, 0));
+        if(keyCode == KeyEvent.VK_RIGHT) cam.move(new Vector3f(0, -MOVE_SPEED, 0));
+        if(keyCode == KeyEvent.VK_SPACE) cam.move(new Vector3f(0, 0, -MOVE_SPEED));
+        if(keyCode == KeyEvent.VK_SHIFT) cam.move(new Vector3f(0, 0, MOVE_SPEED));
 
         //rotation
-        if(keyCode == KeyEvent.VK_W) cam.rotate(ROT_SPEED, 0);
-        if(keyCode == KeyEvent.VK_S) cam.rotate(-ROT_SPEED, 0);
-        if(keyCode == KeyEvent.VK_A) cam.rotate(0, ROT_SPEED);
-        if(keyCode == KeyEvent.VK_D) cam.rotate(0, -ROT_SPEED);
+        if(keyCode == KeyEvent.VK_W) cam.rotate(0, -ROT_SPEED);
+        if(keyCode == KeyEvent.VK_S) cam.rotate(0, ROT_SPEED);
+        if(keyCode == KeyEvent.VK_A) cam.rotate(ROT_SPEED, 0);
+        if(keyCode == KeyEvent.VK_D) cam.rotate(-ROT_SPEED, 0);
     }
 }

@@ -9,6 +9,7 @@ public class RayCaster {
 
     private List<Triangle> triangles = new ArrayList<>();
     public Camera cam;
+    public static final Vector3f LIGHT_DIRECTION = new Vector3f(-1.0f, -1.0f, -1.0f).normalize();
 
     public RayCaster(int screenWidth, int screenHeight) {
         this.cam = new Camera(screenWidth, screenHeight);
@@ -43,7 +44,12 @@ public class RayCaster {
         Triangle intersecting = getIntersectingTriangle(location, ray);
 
         if(intersecting != null) {
-            return intersecting.getColor();
+           int dl = 128 - (int) (Math.min(0, intersecting.normal.dot(LIGHT_DIRECTION)) * 128);
+
+            return ((intersecting.color>>16) & 0x0ff - dl) |
+                    ((intersecting.color>>8) & 0x0ff - dl) |
+                    (intersecting.color & 0x0ff - dl);
+
         }
 
         return -1;
@@ -67,5 +73,9 @@ public class RayCaster {
         }
 
         return intersecting;
+    }
+
+    public List<Triangle> getTriangles() {
+        return this.triangles;
     }
 }
