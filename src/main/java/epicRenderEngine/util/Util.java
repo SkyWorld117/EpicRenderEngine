@@ -22,4 +22,10 @@ public class Util {
                             (float)Math.sin(theta), (float)Math.cos(theta), 0,
                         0,                  0,                      1);
     }
+
+    public static Matrix3f getRotationX(double theta) {
+        return new Matrix3f( 1, 0, 0,
+                0,(float)Math.cos(theta), -(float)Math.sin(theta),
+                0, (float)Math.sin(theta), (float)Math.cos(theta));
+    }
 }

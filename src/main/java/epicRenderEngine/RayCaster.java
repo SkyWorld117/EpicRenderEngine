@@ -41,38 +41,46 @@ public class RayCaster {
      * @return
      */
     private int castPixel(Vector3f location, Vector3f ray) {
-        Triangle intersecting = getIntersectingTriangle(location, ray);
+
+        double minDist = Double.MAX_VALUE;
+        Triangle intersecting = null;
+        double u = 0, v = 0;
+
+        for(Triangle triangle : this.triangles) {
+            double[] uv = new double[2];
+            Vector3f intersectionVec = MollerTrumbore.rayIntersectsTriangle(location, ray, triangle, uv);
+
+            if(intersectionVec != null) {
+                double l = intersectionVec.sub(location).length();
+
+                if (l < minDist) {
+                    minDist = l;
+                    intersecting = triangle;
+                    u = uv[0];
+                    v = uv[1];
+                }
+            }
+        }
 
         if(intersecting != null) {
-           int dl = 128 - (int) (Math.min(0, intersecting.normal.dot(LIGHT_DIRECTION)) * 128);
+            int dl = 20 - (int) (Math.min(0, intersecting.normal.dot(LIGHT_DIRECTION)) * 20);
+            int color;
+            if(intersecting.getTexture() == null) {
+                color = intersecting.getColor();
+            } else {
+                color = intersecting.getTexture().getRGB((int)(u * (intersecting.getTexture().getWidth() - 1)) , (int)(v * (intersecting.getTexture().getHeight() - 1)));
+            }
 
-            return ((intersecting.color>>16) & 0x0ff - dl) |
-                    ((intersecting.color>>8) & 0x0ff - dl) |
-                    (intersecting.color & 0x0ff - dl);
+            int b = (color>>16) & 0x0ff;
+            int g = (color>>8) & 0x0ff;
+            int r = color & 0x0ff;
+
+
+            return (Math.max(0, b - dl) << 16) | (Math.max(0, g - dl) << 8) | (Math.max(0, r - dl));
 
         }
 
         return -1;
-    }
-
-
-    private Triangle getIntersectingTriangle(Vector3f location, Vector3f direction) {
-        double minDist = Double.MAX_VALUE;
-        Triangle intersecting = null;
-        for(Triangle triangle : this.triangles) {
-            Vector3f intersectionVec = MollerTrumbore.rayIntersectsTriangle(location, direction, triangle);
-
-            if(intersectionVec == null) continue;
-
-            double l = intersectionVec.sub(location).length();
-
-            if(l < minDist) {
-                minDist = l;
-                intersecting = triangle;
-            }
-        }
-
-        return intersecting;
     }
 
     public List<Triangle> getTriangles() {

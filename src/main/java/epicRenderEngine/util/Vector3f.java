@@ -2,6 +2,10 @@ package epicRenderEngine.util;
 
 public class Vector3f {
     public static final Vector3f ZERO = new Vector3f(0, 0, 0);
+    public static final Vector3f EX = new Vector3f(1, 0, 0);
+    public static final Vector3f EY = new Vector3f(0, 1, 0);
+    public static final Vector3f EZ = new Vector3f(0, 0, 1);
+
     public float x = 0, y = 0, z = 0;
 
     public Vector3f(float x, float y, float z) {

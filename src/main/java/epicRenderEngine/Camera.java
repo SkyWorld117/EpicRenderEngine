@@ -10,7 +10,7 @@ public class Camera {
     public final int screenHeight;
     public Vector3f position = new Vector3f(-200.0f, 0.0f, 0.0f);
     public Vector3f direction = new Vector3f(1.0f, 0.0f, 0.0f);
-    public Vector3f rotation = new Vector3f(0.0f, 0.0f, 1.0f);
+
     public double FOV = Math.toRadians(80.0);
 
     public Camera(int screenWidth, int screenHeight) {
@@ -30,8 +30,9 @@ public class Camera {
         float dx = (float)(x - screenWidth / 2);
         float dy = (float)(y - screenHeight / 2);
 
-        Vector3f cross = this.direction.cross(this.rotation).normalize();
-        return position.add(cross.scale(dx)).add(rotation.scale(dy)).sub(focalPoint).normalize();
+        Vector3f yawVec = this.direction.cross(Vector3f.EZ).normalize();
+        Vector3f pitchVec = this.direction.cross(yawVec).normalize();
+        return position.add(yawVec.scale(dx)).add(pitchVec.scale(dy)).sub(focalPoint).normalize();
     }
 
     /**
@@ -50,16 +51,14 @@ public class Camera {
      */
     public void rotate(float yaw, double pitch) {
         if(yaw != 0) {
-            Matrix3f m = Util.getRodriguezMatrix(this.rotation, yaw);
+            Matrix3f m = Util.getRotationZ(yaw);
             this.direction = m.mul(this.direction);
         }
 
         if(pitch != 0) {
-            Vector3f cross = this.direction.cross(this.rotation);
-
-            Matrix3f m = Util.getRodriguezMatrix(cross, pitch);
+            Vector3f yawVec = this.direction.cross(Vector3f.EZ);
+            Matrix3f m = Util.getRodriguezMatrix(yawVec, pitch);
             this.direction = m.mul(this.direction);
-            this.rotation = m.mul(this.rotation);
         }
     }
 }

@@ -23,7 +23,7 @@ public class MollerTrumbore {
      */
 
     @Nullable
-    public static Vector3f rayIntersectsTriangle(Vector3f rayOrigin, Vector3f ray, Triangle triangle) {
+    public static Vector3f rayIntersectsTriangle(Vector3f rayOrigin, Vector3f ray, Triangle triangle, double[] uv) {
         Vector3f edge1 = triangle.v1.sub(triangle.v0);
         Vector3f edge2 = triangle.v2.sub(triangle.v0);
         Vector3f pvec = ray.cross(edge2);
@@ -48,6 +48,8 @@ public class MollerTrumbore {
         // At this stage we can compute t to find out where the intersection point is on the line.
         double t = invDet * edge2.dot(qvec);
         if (t > EPSILON) {
+            uv[0] = u;
+            uv[1] = v;
             return ray.scale((float)t).add(rayOrigin);
         } else {
             return null;

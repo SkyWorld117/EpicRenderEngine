@@ -6,10 +6,14 @@ import epicRenderEngine.util.Matrix3f;
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Util;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.Buffer;
 
 class EpicRenderEngine {
 
@@ -34,10 +38,13 @@ class EpicRenderEngine {
 
         f.setVisible(true);
 
+
         try {
             Triangle[] triangles = ObjectReader.load("data.txt");
             rayCaster.addTriangles(triangles);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -54,9 +61,9 @@ class EpicRenderEngine {
 
             if(ticks > 1000.0 / fps) {
 
-                for(Triangle t : rayCaster.getTriangles()) {
+                for(int i = 0; i < rayCaster.getTriangles().size(); i++) {
                     Matrix3f m = Util.getRotationZ(0.05);
-                    t.applyTransform(m);
+                    rayCaster.getTriangles().get(i).applyTransform(m);
                 }
 
                 render(f, p, rayCaster);

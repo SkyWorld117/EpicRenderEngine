@@ -1,16 +1,21 @@
 package epicRenderEngine.input;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
 import epicRenderEngine.util.Triangle;
 import epicRenderEngine.util.Vector3f;
 
+import javax.imageio.ImageIO;
+
 public class ObjectReader {
-    public static Triangle[] load(String str) throws FileNotFoundException {
+    public static Triangle[] load(String str) throws IOException {
         InputStream is = ObjectReader.class.getClassLoader().getResourceAsStream(str);
+        BufferedImage obame = ImageIO.read(ObjectReader.class.getClassLoader().getResource("obame.png"));
 
         Scanner scanner = new Scanner(is);
         int[] p = new int[3];
@@ -33,7 +38,7 @@ public class ObjectReader {
 
             int color = scanner.nextInt();
 
-            triangles[t] = new Triangle(v0, v1, v2, color);
+            triangles[t] = new Triangle(v0, v1, v2, color, obame);
         }
         return triangles;
     }
