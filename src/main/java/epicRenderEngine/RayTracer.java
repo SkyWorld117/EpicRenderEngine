@@ -48,21 +48,21 @@ public class RayTracer {
         double minDist = Double.MAX_VALUE;
         Triangle intersecting = null;
         Triangle reflecting = null;
-        Vector3f intersectionVec1 = null;
-        Vector3f intersectionVec2 = null;
+        Vector3f intersectionVecP = null;
         double u = 0, v = 0;
         boolean light1, light2;
 
         for (Triangle triangle : this.triangles) {
             double[] uv = new double[2];
-            intersectionVec1 = MollerTrumbore.rayIntersectsTriangle(location, ray, triangle, uv);
+            Vector3f intersectionVec = MollerTrumbore.rayIntersectsTriangle(location, ray, triangle, uv);
 
-            if (intersectionVec1 != null) {
-                double l = intersectionVec1.sub(location).length();
+            if (intersectionVec != null) {
+                double l = intersectionVec.sub(location).length();
 
                 if (l < minDist) {
                     minDist = l;
                     intersecting = triangle;
+                    intersectionVecP = intersectionVec;
                     u = uv[0];
                     v = uv[1];
                 }
@@ -83,17 +83,16 @@ public class RayTracer {
                 light1 = true;
             }
 
-
-            double len=0.0;
+            minDist = Double.MAX_VALUE;
             for (Triangle triangle : this.triangles) {
                 double[] uv = new double[2];
-                intersectionVec2 = MollerTrumbore.rayIntersectsTriangle(intersectionVec1, intersecting.reflect(location, ray), triangle, uv);
+                Vector3f intersectionVec = MollerTrumbore.rayIntersectsTriangle(intersectionVecP, intersecting.reflect(location, ray), triangle, uv);
 
-                if (intersectionVec2 != null) {
-                    len = intersectionVec2.sub(location).length();
+                if (intersectionVec != null) {
+                    double l = intersectionVec.sub(intersectionVecP).length();
 
-                    if (len < minDist) {
-                        minDist = len;
+                    if (l < minDist && l > 0.001) {
+                        minDist = l;
                         reflecting = triangle;
                         u = uv[0];
                         v = uv[1];
@@ -113,18 +112,16 @@ public class RayTracer {
                 } else {
                     light2 = true;
                 }
-                return getColor(light1, light2, color1, color2, getDiscount(len));
+                return getColor(light1, light2, color1, color2, getDiscount(minDist));
             }
 
             if (light1) {
-                int b = (color1 >> 16) & 0x0ff;
-                int g = (color1 >> 8) & 0x0ff;
-                int r = color1 & 0x0ff;
-                return (b << 16) | (g << 8) | (r);
+                return color1;
             } else {
-                return (0 << 16) | (0 << 8) | (0);
+                return 0;
             }
-            //return (Math.max(0, b) << 16) | (Math.max(0, g) << 8) | (Math.max(0, r));
+
+            //return color1;
 
         }
 
