@@ -27,7 +27,8 @@ class EpicRenderEngine {
         //create FrameWrapper
         JFrame f = new JFrame("Frame");
 
-        f.addKeyListener(new KeyboardListener(rayCaster.cam));
+        KeyboardListener k = new KeyboardListener(rayCaster.cam);
+        f.addKeyListener(k);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
 
@@ -66,6 +67,7 @@ class EpicRenderEngine {
                     rayCaster.getTriangles().get(i).applyTransform(m);
                 }
 
+                k.updateParameters();
                 render(f, p, rayCaster);
                 ticks = 0;
             }

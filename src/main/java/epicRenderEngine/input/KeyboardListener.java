@@ -8,9 +8,14 @@ import java.awt.event.KeyEvent;
 
 public class KeyboardListener extends KeyAdapter {
 
+    private static final float MOVE_SPEED = 15.0f;
+    private static final float ROT_SPEED = (float)Math.toRadians(1.5);
+
     private final Camera cam;
-    private final float MOVE_SPEED = 7.0f;
-    private final float ROT_SPEED = (float)Math.toRadians(1.5);
+    private Vector3f dMove = Vector3f.ZERO;
+    private float dYaw = 0;
+    private float dPitch = 0;
+    private boolean isDirty = false;
 
     public KeyboardListener(Camera cam) {
         this.cam = cam;
@@ -21,17 +26,32 @@ public class KeyboardListener extends KeyAdapter {
         int keyCode = event.getKeyCode();
 
         //translation
-        if(keyCode == KeyEvent.VK_DOWN) cam.move(new Vector3f(-MOVE_SPEED, 0, 0));
-        if(keyCode == KeyEvent.VK_UP) cam.move(new Vector3f(MOVE_SPEED, 0, 0));
-        if(keyCode == KeyEvent.VK_LEFT) cam.move(new Vector3f(0, MOVE_SPEED, 0));
-        if(keyCode == KeyEvent.VK_RIGHT) cam.move(new Vector3f(0, -MOVE_SPEED, 0));
-        if(keyCode == KeyEvent.VK_SPACE) cam.move(new Vector3f(0, 0, MOVE_SPEED));
-        if(keyCode == KeyEvent.VK_SHIFT) cam.move(new Vector3f(0, 0, -MOVE_SPEED));
+        if(keyCode == KeyEvent.VK_DOWN) dMove = dMove.addX(-MOVE_SPEED);
+        if(keyCode == KeyEvent.VK_UP) dMove = dMove.addX(MOVE_SPEED);
+        if(keyCode == KeyEvent.VK_LEFT) dMove = dMove.addY(MOVE_SPEED);
+        if(keyCode == KeyEvent.VK_RIGHT) dMove = dMove.addY(-MOVE_SPEED);
+        if(keyCode == KeyEvent.VK_SPACE) dMove = dMove.addZ(MOVE_SPEED);
+        if(keyCode == KeyEvent.VK_SHIFT) dMove = dMove.addZ(-MOVE_SPEED);
 
         //rotation
-        if(keyCode == KeyEvent.VK_W) cam.rotate(0, ROT_SPEED);
-        if(keyCode == KeyEvent.VK_S) cam.rotate(0, -ROT_SPEED);
-        if(keyCode == KeyEvent.VK_A) cam.rotate(ROT_SPEED, 0);
-        if(keyCode == KeyEvent.VK_D) cam.rotate(-ROT_SPEED, 0);
+        if(keyCode == KeyEvent.VK_W) dPitch += ROT_SPEED;
+        if(keyCode == KeyEvent.VK_S) dPitch -= ROT_SPEED;
+        if(keyCode == KeyEvent.VK_A) dYaw += ROT_SPEED;
+        if(keyCode == KeyEvent.VK_D) dYaw -= ROT_SPEED;
+
+        this.isDirty = true;
+    }
+
+    public void updateParameters() {
+        if(this.isDirty) {
+            this.isDirty = false;
+
+            cam.move(dMove);
+            cam.rotate(dYaw, dPitch);
+
+            dMove = Vector3f.ZERO;
+            dYaw = 0;
+            dPitch = 0;
+        }
     }
 }

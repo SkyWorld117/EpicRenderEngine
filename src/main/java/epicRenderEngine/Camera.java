@@ -8,7 +8,7 @@ public class Camera {
 
     public final int screenWidth;
     public final int screenHeight;
-    public Vector3f position = new Vector3f(-200.0f, 0.0f, 0.0f);
+    public Vector3f position = new Vector3f(-1500.0f, 0.0f, 300.0f);
     public Vector3f direction = new Vector3f(1.0f, 0.0f, 0.0f);
 
     public double FOV = Math.toRadians(80.0);
