@@ -64,7 +64,7 @@ class EpicRenderEngine {
 
                 for(int i = 0; i < rayCaster.getTriangles().size(); i++) {
                     Matrix3f m = Util.getRotationZ(0.05);
-                    rayCaster.getTriangles().get(i).applyTransform(m);
+                    rayCaster.getTriangles().get(i).applyTransform(m); //Rotation of rendered object
                 }
 
                 k.updateParameters();
