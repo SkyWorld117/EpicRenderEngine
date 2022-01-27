@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 public class ObjectReader {
     public static Triangle[] load(String str) throws IOException {
         InputStream is = ObjectReader.class.getClassLoader().getResourceAsStream(str);
-        BufferedImage obame = ImageIO.read(ObjectReader.class.getClassLoader().getResource("obame.png")); //Texture change
+        BufferedImage obame = ImageIO.read(ObjectReader.class.getClassLoader().getResource("penguin.jpg")); //Texture change
 
         Scanner scanner = new Scanner(is);
         int[] p = new int[3];

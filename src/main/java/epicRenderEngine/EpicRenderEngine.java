@@ -17,8 +17,8 @@ import java.nio.Buffer;
 
 class EpicRenderEngine {
 
-    public static final int WIN_WIDTH = 600;
-    public static final int WIN_HEIGHT = 400;
+    public static final int WIN_WIDTH = 1920;
+    public static final int WIN_HEIGHT = 1080;
 
     public static void main(String[] args) {
         //initialize RayCaster
