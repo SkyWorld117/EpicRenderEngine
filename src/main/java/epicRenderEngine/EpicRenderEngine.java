@@ -22,7 +22,7 @@ class EpicRenderEngine {
 
     public static void main(String[] args) {
         //initialize RayCaster
-        RayCaster rayCaster = new RayCaster(WIN_WIDTH, WIN_HEIGHT);
+        RayTracer rayCaster = new RayTracer(WIN_WIDTH, WIN_HEIGHT);
 
         //create FrameWrapper
         JFrame f = new JFrame("Frame");
@@ -63,7 +63,7 @@ class EpicRenderEngine {
 
                 for(int i = 0; i < rayCaster.getTriangles().size(); i++) {
                     Matrix3f m = Util.getRotationZ(0.05);
-                    rayCaster.getTriangles().get(i).applyTransform(m);
+                    //rayCaster.getTriangles().get(i).applyTransform(m);
                 }
 
                 render(f, p, rayCaster);
@@ -79,7 +79,7 @@ class EpicRenderEngine {
      * @param p
      * @param rayCaster
      */
-    private static void render(JFrame f, RaycasterPanel p, RayCaster rayCaster) {
+    private static void render(JFrame f, RaycasterPanel p, RayTracer rayCaster) {
         rayCaster.castRays(p);
         //update canvas
         f.repaint();

@@ -38,7 +38,7 @@ public class ObjectReader {
 
             int color = scanner.nextInt();
 
-            triangles[t] = new Triangle(v0, v1, v2, color, obame);
+            triangles[t] = new Triangle(v0, v1, v2, color, null);
         }
         return triangles;
     }

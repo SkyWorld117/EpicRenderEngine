@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 public class KeyboardListener extends KeyAdapter {
 
     private final Camera cam;
-    private final float MOVE_SPEED = 7.0f;
+    private final float MOVE_SPEED = 15.0f;
     private final float ROT_SPEED = (float)Math.toRadians(1.5);
 
     public KeyboardListener(Camera cam) {
